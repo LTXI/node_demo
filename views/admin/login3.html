@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include common/include_meta.html %>
+    <link rel="stylesheet" href="/admin/css/login.css">
+</head>
+<body>
+<form action="/admin/login" method="post">
+    <input type="text" name="username" id="username"><br>
+    <input type="text" name="password" id="password">
+    <input type="submit" id="loginSubmit2">
+</form>
+
+<% include common/include_script.html %>
+<script>
+    $(function () {
+        $('#loginSubmit').on('click',function(event) {
+
+            $.ajax({
+                type: "POST",
+                url: "/admin/login",
+                data : {
+                    username : $('#username').val(),
+                    password : $('#password').val()
+                },
+                success: function(msg){
+                    console.log( "success " );
+                },
+                error:function (msg) {
+                    console.log( "error "  );
+                }
+
+            });
+        });
+
+    });
+</script>
+</body>
+</html>

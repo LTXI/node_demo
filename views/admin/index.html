@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>First</title>
+    <% include common/include_meta.html %>
+    <style type="text/css">
+        .top {
+            height: 170px;
+            width: 100%;
+            background: gray;
+            position: relative;
+        }
+        .wrapper {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            margin-top: -170px;
+            padding-top: 170px;
+            box-sizing: border-box;
+        }
+        .left {
+            height: 100%;
+            width: 200px;
+            background: green;
+            float: left;
+        }
+        .right{
+           height: 100%;
+            width: 100%;
+            background: darkslategray;
+        }
+        .big {
+            font-size: 30px;
+            color: red;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="top">
+    <div>欢迎您进入后台管理系统 <span style="color: #2aabd2; fontSize:24;"><%= username %></span></div>
+</div>
+<div class="wrapper">
+    <div class="left">
+        <ul>
+            <li><a href="/admin/index1" target="content" >index1</a></li>
+            <li><a href="/admin/index2" target="content" >index2</a></li>
+            <li><a href="/admin/index3" target="content" >index3</a></li>
+        </ul>
+    </div>
+    <div class="right">
+        <iframe src="/admin/index1"  id="Iframe" name="content"  scrolling="no" frameborder="0" style="border:0px;"></iframe>
+    </div>
+</div>
+<%include common/include_script.html %>
+<script>
+    $(function () {
+        $('a').on('click', function (event) {
+            $('a').removeClass('big');
+            $(this).addClass('big');
+        });
+
+        window.onresize=function(){
+            changeFrameHeight();
+
+        }
+        function changeFrameHeight() {
+            var iframe = document.getElementById("Iframe");
+            if(iframe.Document){//ie自有属性
+                iframe.style.height = iframe.Document.documentElement.scrollHeight;
+            }else if(iframe.contentDocument){//ie,firefox,chrome,opera,safari
+                iframe.height = iframe.contentDocument.body.offsetHeight ;
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include common/include_meta.html %>
+    <link rel="stylesheet" href="/admin/css/login.css">
+</head>
+<body>
+<div class="header">
+    <div class="comm-wrapper">
+        <div class="logo">
+            <a href="javascript:;"><img src="/admin/images/logo.jpg"></a>
+        </div>
+        <div class="text">学校管理系统</div>
+    </div>
+</div>
+<div class="content">
+
+    <div class="comm-wrapper">
+        <div class="login">
+            <h2>用户登录</h2>
+            <div class="form">
+                <div class="item ">
+                    <input name="loginname" id="loginname" class="text highlight" type="text" size="30"  autocomplete="off" maxlength="30"   placeholder="输入用户名">
+                    <i class="i-name icon"></i>
+                    <label id="loginname_error" class="focus"></label>
+                </div>
+                <div class="item">
+                    <input name="nloginpwd" id="nloginpwd" class="text highlight" type="password" size="30"  maxlength="30" placeholder="输入密码">
+                    <i class="i-pass icon"></i>
+                    <label id="loginpass_error" class="focus"></label>
+                </div>
+                <div class="item login-btn">
+                    <input type="button" class="btn-entry" id="loginSubmit" value="登&nbsp;&nbsp;录">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include common/include_footer.html %>
+<% include common/include_script.html %>
+<script>
+    $(function () {
+        //登录
+        $('#loginSubmit').on('click',function(event) {
+            var $nel = $('#loginname');
+            var $pasel = $('#nloginpwd');
+            $nel.removeClass('highlight2');
+            $('#nloginpwd').removeClass('highlight2');
+            if ($nel.val() == '') {
+                $nel.addClass('highlight2');
+                return;
+            }
+
+            if ($pasel.val() == '') {
+                $pasel.addClass('highlight2');
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "admin/login",
+                data : {
+                    "username" : $nel.val(),
+                    "password" : $pasel.val()
+                },
+                success: function(msg){
+                    alert( "Data Saved: " + msg );
+                },
+                error:function (msg) {
+                    alert( "Data Saved: " + msg );
+                }
+
+            });
+        });
+    });
+</script>
+</body>
+</html>
